@@ -1,8 +1,20 @@
-puts "Why, hello there. What would you like to do?"
-puts "--Enter 'Add' to add a contact"
-puts "--Enter 'Find' to find a contact within the roladex"
-puts "--Enter 'Modify' to modify a contact"
-puts "--Enter 'Remove' to remove to remove a contact from the roladex"
+def print_main_menu
+	puts "[1] Add a new contact"
+  puts "[2] Modify an existing contact"
+  puts "[3] Delete a contact"
+  puts "[4] Display all the contacts"
+  puts "[5] Display an attribute"
+  puts "[6] Exit"
+  puts "Enter a number: "
+end
+
+def main_menu
+  print_main_menu
+  selection = gets.chomp.to_i
+  call_option(selection)  
+end
+
+main_menu
 
 class Contact
 	attr_accessor :id, :first_name, :last_name, :email, :notes
