@@ -16,7 +16,6 @@ class CRM
 	end
 
 	def print_menu
-		
 		puts "[1] Add a contact"
 		puts "[2] Modify a contact"
 		puts "[3] Display all contacts"
@@ -62,11 +61,10 @@ class CRM
 		main_menu
 	end
 
-	# def modify_contact
-	# 	puts "Please enter the id of the contact you would like to modify"
-	# 	id = gets.chomp
-	# 	@rolodex.find_by_id(id)		 
-	# end
+	def modify_contact
+		@rolodex.modify_attr
+		main_menu		 
+	end
 
 	def display_all
 		@rolodex.all
