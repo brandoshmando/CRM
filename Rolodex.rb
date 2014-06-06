@@ -6,11 +6,13 @@ class Rolodex
 	end
 
 	def add_contact(contact)
-		@contacts << contact 
+		@contacts << contact
+		contact.id = @counter
+		@counter += 1 
 	end
 
 	def find_by_id(id)
-		@contacts.find
+		@contacts.find(id)
 	end
 
 	def all 
