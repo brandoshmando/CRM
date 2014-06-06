@@ -1,59 +1,77 @@
 class CRM
-attr_reader :name
+	require_relative 'Contact.rb'
+	require_relative 'Rolodex.rb'
+
+		attr_reader :name
 	def initialize(name)
 		@name = name
-	end
-
-	def print_main_menu
-		puts "[1] Add a new contact"
-	  puts "[2] Modify an existing contact"
-	  puts "[3] Delete a contact"
-	  puts "[4] Display all the contacts"
-	  puts "[5] Display an attribute"
-	  puts "[6] Exit"
-	  puts "Enter a number: "
+		@rolodex = Rolodex.new
+		puts "Welcome to #{name}"
 	end
 
 	def main_menu
-		puts "Welcome to the #{name}"
-	  print_main_menu
-	  selection = gets.chomp.to_i
-	  call_option(selection)  
+		print_menu	
+		selection = gets.chomp.to_i
+		option_call(selection)
 	end
 
-	def call_option(selection)
+	def print_menu
+		
+		puts "[1] Add a contact"
+		puts "[2] Modify a contact"
+		puts "[3] Display all contacts"
+		puts "[4] Display contact"
+		puts "[5] Display contact attribute"
+		puts "[6] Delete contact"
+		puts "[7] Exit"
+		puts "Enter your selection:"
+	end
+
+	def option_call(selection)
 		case selection
-		when 1 then add_new_contact 	
+		when 1 then add_a_contact
 		when 2 then modify_contact
-		when 3 then delete_contact
-		when 4 then display_all
+		when 3 then display_all
+		when 4 then display_contact
 		when 5 then display_attribute
-		when 6 
-			puts "Goodbye!"
+		when 6 then Delete
+		when 7
+			puts "--Goodbye--"
 			return
 		else
-			puts "Invalid input"
+			puts "--Invalid entry--"
+			puts
 			main_menu
 		end
 	end
-end
-crm = CRM.new("Roladex 3000")
-crm.main_menu
 
-class Contact
-	attr_accessor :id, :first_name, :last_name, :email, :notes
-	
-	def inititialize(id, first_name, last_name, email, notes)
-		@id = 1
-		@first_name = first_name
-		@last_name = last_name
-		@email = email
-		@notes = []
+	def add_a_contact
+		puts "Enter the first name: "
+		first_name = gets.chomp
+
+		puts "Enter the last name: "
+		last_name = gets.chomp
+
+		puts "Enter the email address: "
+		email = gets.chomp
+
+		puts "Enter a note about this person: "
+		note = gets.chomp
+
+		@rolodex.add_contact(Contact.new(first_name, last_name, email, note))
+		main_menu
 	end
 
-	def add_contact
-	end
-end
+	# def modify_contact
+	# 	puts "Please enter the id of the contact you would like to modify"
+	# 	id = gets.chomp
+	# 	@rolodex.find_by_id(id)		 
+	# end
 
-class Roladex
+	def display_all
+		@rolodex.all
+		main_menu	
+	end	
 end
+	crm = CRM.new("Bitmaker")
+	crm.main_menu
