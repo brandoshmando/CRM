@@ -1,8 +1,13 @@
 class CRM
 	require_relative 'Contact.rb'
 	require_relative 'Rolodex.rb'
+	attr_reader :name
+	
+	def self.run(name)
+		crm = new(name)
+		crm.main_menu
+	end
 
-		attr_reader :name
 	def initialize(name)
 		@name = name
 		@rolodex = Rolodex.new
@@ -78,10 +83,10 @@ class CRM
 
 	def delete
 		puts "Please enter the ID of the contact you would like to delete:"
-		contact = gets.chomp.to_i
-		@rolodex.delete(contact)
+		id = gets.chomp.to_i
+		@rolodex.remove(id)
 		main_menu
 	end	
 end
-	crm = CRM.new("Bitmaker")
-	crm.main_menu
+ 
+CRM.run("Roladex 3000")

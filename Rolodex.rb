@@ -60,6 +60,11 @@ class Rolodex
 		puts "Notes: #{match.note}"
 		puts "ID: #{match.id}"
 		puts "-----------------------"
+	end
+
+	def remove(id)
+		filter
+		@contacts.delete(find_by_id(id))
 	end	
 
 	def print_attr_options
