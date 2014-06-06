@@ -33,7 +33,7 @@ class CRM
 		when 3 then display_all
 		when 4 then display_contact
 		when 5 then display_attribute
-		when 6 then Delete
+		when 6 then delete
 		when 7
 			puts "--Goodbye--"
 			return
@@ -69,6 +69,18 @@ class CRM
 	def display_all
 		@rolodex.all
 		main_menu	
+	end
+
+	def display_contact
+		@rolodex.search
+		main_menu
+	end
+
+	def delete
+		puts "Please enter the ID of the contact you would like to delete:"
+		contact = gets.chomp.to_i
+		@rolodex.delete(contact)
+		main_menu
 	end	
 end
 	crm = CRM.new("Bitmaker")
