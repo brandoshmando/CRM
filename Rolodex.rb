@@ -12,13 +12,17 @@ class Rolodex
 	end
 	def modify_attr
 		puts "Enter the ID of the contact you you would like to modify: "
-		id = gets.chomp
+		id = gets.chomp.to_i
 		print_modify_options
-		object = find_by_id(id)
+		selection_index = gets.chomp.to_i
+		selection = [:first_name=, :last_name=, :email=, :note=][selection_index]
+		puts "Enter the new value: "
+		new_value = gets.chomp
+		find_by_id(id).public_send(selection, new_value)
 	end
 		
 	def find_by_id(id)
-		@contacts.find {|contact| contact.id == id}
+		@contacts.find { |contact| contact.id == id }
 	end
 
 	def all 
@@ -40,10 +44,10 @@ class Rolodex
 	end
 
 	def print_modify_options
-		puts "[1] First Name:"
-		puts "[2] Last Name:"
-		puts "[3] Email:"
-		puts "[4] Note"
+		puts "[0] First Name:"
+		puts "[1] Last Name:"
+		puts "[2] Email:"
+		puts "[3] Note"
 		puts "Enter the selction of the attribute you would like to modify:"
 	end
 end
