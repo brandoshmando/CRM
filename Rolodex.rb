@@ -18,6 +18,7 @@ class Rolodex
 		selection = [:first_name=, :last_name=, :email=, :note=][selection_index]
 		puts "Enter the new value: "
 		new_value = gets.chomp
+		filter
 		find_by_id(id).public_send(selection, new_value)
 	end
 		
@@ -49,5 +50,13 @@ class Rolodex
 		puts "[2] Email:"
 		puts "[3] Note"
 		puts "Enter the selction of the attribute you would like to modify:"
+	end
+
+	def filter
+		puts "Are you sure you would like to perform this action?"
+		answer = gets.downcase.chomp
+		if answer == "no"
+			return
+		end
 	end
 end
