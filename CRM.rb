@@ -77,7 +77,7 @@ class CRM
 	end
 
 	def display_contact
-		@rolodex.search
+		@rolodex.find_by_attribute
 		main_menu
 	end
 

@@ -45,14 +45,16 @@ class Rolodex
 		end
 	end
 
-	def search
+	def find_by_attribute
 		print_attr_options
-		puts "Which attribute would you like to search by?"
-		selection_index = gets.chomp.to_i
+		puts "Please enter the selection of the attritbute you would like to search by:"
+		attribute_index = gets.chomp.to_i
+		selection = [:first_name, :last_name, :email, :note, :id][attribute_index]
+
 		puts "Please enter the attribute:"
-		attribute = gets.chomp
-		selection = [:first_name, :last_name, :email, :note][selection_index]
-		match = @contacts.find {|contact| selection == attribute }
+		search_with = gets.chomp
+		match = @contacts.find {|contact| contact.send(selection) == search_with}
+
 		puts "-----------------------"
 		puts "First Name: #{match.first_name}"
 		puts "Last Name: #{match.last_name}"
