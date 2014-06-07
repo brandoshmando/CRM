@@ -70,14 +70,17 @@ class CRM
 	end
 
 	def modify_contact
-		puts "Enter the ID of the contact you you would like to modify: "
-		attr_id = gets.chomp.to_i
+		print_attr_options
+		puts "Please enter the selection of the attritbute you would like to search by:"
+		search_index = gets.chomp.to_i
+		puts "Please enter the search term:"
+		search_term = gets.chomp
 		print_attr_options
 		puts "Enter the selection of the attribute you would like to modify:"
-		selection_index = gets.chomp.to_i
+		mod_index = gets.chomp.to_i
 		puts "Enter the new value: "
 		new_value = gets.chomp
-		@rolodex.modify_attr(selection_index, new_value, attr_id)
+		@rolodex.modify_attr(search_index, search_term, mod_index, new_value)
 		main_menu		 
 	end
 

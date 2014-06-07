@@ -10,14 +10,11 @@ class Rolodex
 		contact.id = @counter
 		@counter += 1 
 	end
-	def modify_attr(index, value, attr_id)
+	def modify_attr(search_index, search_term, mod_index, new_value)
 		print_attr_options
-		selection_index = index
-		new_value = value
-		id = attr_id
-		selection = [:first_name=, :last_name=, :email=, :note=][selection_index - 1]
+		selection = [:first_name=, :last_name=, :email=, :note=][mod_index - 1]
 		filter
-		find_by_id(id).public_send(selection, new_value)
+		find_by_attribute(search_index, search_term).public_send(selection, new_value)
 	end
 		
 	def find_by_id(id)
@@ -43,20 +40,16 @@ class Rolodex
 	end
 
 	def find_by_attribute(index, search_term)
-		attribute_index = index
-		selection = [:first_name, :last_name, :email, :note, :id][attribute_index -1 ]
+		selection = [:first_name, :last_name, :email, :note, :id][index -1 ]
+		@contacts.find {|contact| contact.send(selection) == search_term}
 
-		puts "Please enter the attribute:"
-		search_with = search_term
-		match = @contacts.find {|contact| contact.send(selection) == search_with}
-
-		puts "-----------------------"
-		puts "First Name: #{match.first_name}" 
-		puts "Last Name: #{match.last_name}"
-		puts "Email Address: #{match.email}"
-		puts "Notes: #{match.note}"
-		puts "ID: #{match.id}"
-		puts "-----------------------"
+		# puts "-----------------------"
+		# puts "First Name: #{match.first_name}" 
+		# puts "Last Name: #{match.last_name}"
+		# puts "Email Address: #{match.email}"
+		# puts "Notes: #{match.note}"
+		# puts "ID: #{match.id}"
+		# puts "-----------------------"
 	end
 
 
