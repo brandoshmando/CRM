@@ -14,7 +14,8 @@ class Rolodex
 		print_attr_options
 		selection = [:first_name=, :last_name=, :email=, :note=][mod_index - 1]
 		filter
-		find_by_attribute(search_index, search_term).public_send(selection, new_value)
+		search_display(search_index, search_term)
+		#.public_send(selection, new_value)
 	end
 		
 	def find_by_id(id)
@@ -40,12 +41,12 @@ class Rolodex
 			spacer
 			puts "No results found. Press enter to return to Main Menu:"
 			gets.chomp
+		elsif matches.size == 1
+			contact_format(matches)
+			puts "Press enter to return to main menu"
+			gets.chomp
 		else
-			matches.each_with_index do |match, index|
-				spacer
-				puts "[#{index + 1}]|First Name: #{match.first_name} | Last Name: #{match.last_name} | Email Address: #{match.email} | Notes: #{match.note} | ID: #{match.id}"
-				spacer
-			end
+			list_format(matches)
 			puts "Press enter to return to the Main Menu"
 			gets.chomp
 		end
@@ -92,6 +93,14 @@ class Rolodex
 				puts "Email Address: #{contact.email}"
 				puts "Notes: #{contact.note}"
 				puts "ID: #{contact.id}"
+			spacer
+		end
+	end
+
+	def list_format(array)
+		array.each_with_index do |match, index|
+			spacer
+			puts "[#{index + 1}]|First Name: #{match.first_name} | Last Name: #{match.last_name} | Email Address: #{match.email} | Notes: #{match.note} | ID: #{match.id}"
 			spacer
 		end
 	end
