@@ -87,7 +87,13 @@ class CRM
 	end
 
 	def display_contact
-		@rolodex.find_by_attribute
+		print_attr_options
+		puts "Please enter the selection of the attritbute you would like to search by:"
+		index = gets.chomp.to_i
+
+		puts "Please enter the attribute:"
+		search_term = gets.chomp
+		@rolodex.find_by_attribute(index, search_term)
 		main_menu
 	end
 

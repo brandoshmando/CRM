@@ -15,7 +15,7 @@ class Rolodex
 		selection_index = index
 		new_value = value
 		id = attr_id
-		selection = [:first_name=, :last_name=, :email=, :note=][selection_index]
+		selection = [:first_name=, :last_name=, :email=, :note=][selection_index - 1]
 		filter
 		find_by_id(id).public_send(selection, new_value)
 	end
@@ -42,13 +42,12 @@ class Rolodex
 		end
 	end
 
-	def find_by_attribute
-		puts "Please enter the selection of the attritbute you would like to search by:"
-		attribute_index = gets.chomp.to_i
+	def find_by_attribute(index, search_term)
+		attribute_index = index
 		selection = [:first_name, :last_name, :email, :note, :id][attribute_index -1 ]
 
 		puts "Please enter the attribute:"
-		search_with = gets.chomp
+		search_with = search_term
 		match = @contacts.find {|contact| contact.send(selection) == search_with}
 
 		puts "-----------------------"
@@ -77,7 +76,7 @@ class Rolodex
 	def filter
 		puts "Are you sure you would like to perform this action?"
 		answer = gets.downcase.chomp
-		if answer == "no"
+		if answer != "yes"
 			return
 		end
 	end
