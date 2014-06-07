@@ -11,6 +11,9 @@ class CRM
 	def initialize(name)
 		@name = name
 		@rolodex = Rolodex.new
+		@rolodex.add_contact(Contact.new("Brandon", "Craft", "brancraft@gmail.com", "note"))
+		@rolodex.add_contact(Contact.new("Tester", "McGee", "tester@mcgee.com", "Tester is a cool guy."))
+		@rolodex.add_contact(Contact.new("Rob", "Ford", "lovescrack77@shaw.ca", "He crraaazy!"))
 		puts "Welcome to #{name}"
 	end
 
@@ -67,7 +70,14 @@ class CRM
 	end
 
 	def modify_contact
-		@rolodex.modify_attr
+		puts "Enter the ID of the contact you you would like to modify: "
+		attr_id = gets.chomp.to_i
+		print_attr_options
+		puts "Enter the selection of the attribute you would like to modify:"
+		selection_index = gets.chomp.to_i
+		puts "Enter the new value: "
+		new_value = gets.chomp
+		@rolodex.modify_attr(selection_index, new_value, attr_id)
 		main_menu		 
 	end
 
@@ -87,6 +97,13 @@ class CRM
 		@rolodex.remove(id)
 		main_menu
 	end	
+
+	def print_attr_options
+		puts "[1] First Name:"
+		puts "[2] Last Name:"
+		puts "[3] Email:"
+		puts "[4] Note"
+	end
 end
  
 CRM.run("Roladex 3000")

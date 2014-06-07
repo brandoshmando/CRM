@@ -10,15 +10,12 @@ class Rolodex
 		contact.id = @counter
 		@counter += 1 
 	end
-	def modify_attr
-		puts "Enter the ID of the contact you you would like to modify: "
-		id = gets.chomp.to_i
+	def modify_attr(index, value, attr_id)
 		print_attr_options
-		puts "Enter the selection of the attribute you would like to modify:"
-		selection_index = gets.chomp.to_i
+		selection_index = index
+		new_value = value
+		id = attr_id
 		selection = [:first_name=, :last_name=, :email=, :note=][selection_index]
-		puts "Enter the new value: "
-		new_value = gets.chomp
 		filter
 		find_by_id(id).public_send(selection, new_value)
 	end
@@ -46,7 +43,6 @@ class Rolodex
 	end
 
 	def find_by_attribute
-		print_attr_options
 		puts "Please enter the selection of the attritbute you would like to search by:"
 		attribute_index = gets.chomp.to_i
 		selection = [:first_name, :last_name, :email, :note, :id][attribute_index -1 ]
@@ -64,6 +60,8 @@ class Rolodex
 		puts "-----------------------"
 	end
 
+
+
 	def remove(id)
 		filter
 		@contacts.delete(find_by_id(id))
@@ -74,7 +72,6 @@ class Rolodex
 		puts "[2] Last Name:"
 		puts "[3] Email:"
 		puts "[4] Note"
-		
 	end
 
 	def filter
