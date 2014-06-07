@@ -27,29 +27,28 @@ class Rolodex
 			puts "Your rolodex is empty. Add a contact first!"
 			puts "-------------------------------------------"
 		else
-			@contacts.each do |contact|
-				spacer
-				puts "First Name: #{contact.first_name}"
-				puts "Last Name: #{contact.last_name}"
-				puts "Email Address: #{contact.email}"
-				puts "Notes: #{contact.note}"
-				puts "ID: #{contact.id}"
-				spacer
-			end
-				puts "Press enter to return to Main Menu"
+			contact_array = @contacts.each
+			contact_format(contact_array)
+			puts "Press enter to return to Main Menu"
 		end
 		gets.chomp
 	end
 
 	def search_display(index, search_term)
 		matches = find_by_attribute(index, search_term)
-		matches.each_with_index do |match, index|
+		if matches.empty?
 			spacer
-			puts "[#{index + 1}]|First Name: #{match.first_name} | Last Name: #{match.last_name} | Email Address: #{match.email} | Notes: #{match.note} | ID: #{match.id}"
-			spacer
+			puts "No results found. Press enter to return to Main Menu:"
+			gets.chomp
+		else
+			matches.each_with_index do |match, index|
+				spacer
+				puts "[#{index + 1}]|First Name: #{match.first_name} | Last Name: #{match.last_name} | Email Address: #{match.email} | Notes: #{match.note} | ID: #{match.id}"
+				spacer
+			end
+			puts "Press enter to return to the Main Menu"
+			gets.chomp
 		end
-		puts "Press enter to return to the Main Menu"
-		gets.chomp
 	end
 
 	def find_by_attribute(index, search_term)
@@ -83,5 +82,17 @@ class Rolodex
 
 	def spacer
 		puts "-----------------------"
+	end
+
+	def contact_format(contact_array)
+		contact_array.each do |contact|
+			spacer
+				puts "First Name: #{contact.first_name}"
+				puts "Last Name: #{contact.last_name}"
+				puts "Email Address: #{contact.email}"
+				puts "Notes: #{contact.note}"
+				puts "ID: #{contact.id}"
+			spacer
+		end
 	end
 end
