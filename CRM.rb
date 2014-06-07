@@ -13,6 +13,7 @@ class CRM
 		@name = name
 		@rolodex = Rolodex.new
 		@rolodex.add_contact(Contact.new("Brandon", "Craft", "brancraft@gmail.com", "note"))
+		@rolodex.add_contact(Contact.new("Brandon", "Craft", "brancraft@gmail.com", "note"))
 		@rolodex.add_contact(Contact.new("Tester", "McGee", "tester@mcgee.com", "Tester is a cool guy."))
 		@rolodex.add_contact(Contact.new("Rob", "Ford", "lovescrack77@shaw.ca", "He crraaazy!"))
 		spacer

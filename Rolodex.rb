@@ -42,19 +42,29 @@ class Rolodex
 	end
 
 	def search_display(index, search_term)
-		match = find_by_attribute(index, search_term)
+		matches = find_by_attribute(index, search_term)
 		spacer
-		puts "First Name: #{match.first_name}"
-		puts "Last Name: #{match.last_name}"
-		puts "Email Address: #{match.email}"
-		puts "Notes: #{match.note}"
-		puts "ID: #{match.id}"
-		spacer
+		matches.each do |match|
+			puts "First Name: #{match.first_name}"
+			puts "Last Name: #{match.last_name}"
+			puts "Email Address: #{match.email}"
+			puts "Notes: #{match.note}"
+			puts "ID: #{match.id}"
+			spacer
+		end
+		puts "Press enter to return to the Main Menu"
+		gets.chomp
 	end
 
 	def find_by_attribute(index, search_term)
 		selection = [:first_name, :last_name, :email, :note, :id][index -1 ]
-		@contacts.find {|contact| contact.send(selection) == search_term}
+		result =[]
+		@contacts.each do |contact| 
+			if contact.send(selection) == search_term
+		 		result << contact
+		 	end
+		end
+		result
 	end
 
 	def remove(index, search_term)
