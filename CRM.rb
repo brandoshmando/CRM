@@ -129,6 +129,14 @@ class CRM
 		main_menu
 	end	
 
+	def display_attribute
+		print_attr_options
+		puts "Which attribute would like to print?"
+		index = gets.chomp.to_i
+		@rolodex.print_all(index)
+		main_menu
+	end
+
 	def print_attr_options
 		clear_term
 		spacer

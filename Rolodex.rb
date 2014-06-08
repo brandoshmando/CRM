@@ -10,12 +10,24 @@ class Rolodex
 		contact.id = @counter
 		@counter += 1 
 	end
+	
 	def modify_attr(search_index, search_term, mod_index, new_value)
-		print_attr_options
+		matches = find_by_attribute(search_index, search_term)
 		selection = [:first_name=, :last_name=, :email=, :note=][mod_index - 1]
-		filter
-		search_display(search_index, search_term)
-		#.public_send(selection, new_value)
+		if matches.empty?
+			spacer
+			puts "No results found. Press enter to return to Main Menu:"
+			gets.chomp
+		elsif matches.size == 1
+			contact_format(matches)
+			filter
+			matches[0].public_send(selection, new_value)
+		else
+			list_format(matches)
+			puts "Enter selection of contact you would like to modify:"
+			selection = gets.chomp
+			matches[selection - 1].public_send(selection, new_value)
+		end
 	end
 		
 	def find_by_id(id)
@@ -63,6 +75,15 @@ class Rolodex
 		filter
 		@contacts.delete(find_by_attribute(index, search_term))
 	end	
+
+	def print_all(index)
+		attribute = [:first_name, :last_name, :email, :note, :id][index - 1]
+		spacer
+		@contacts.each {|contact|  puts "| #{contact.send(attribute)} |"}
+		spacer
+		puts "Press Enter to return to Main Menu"
+		gets.chomp
+	end
 
 	def print_attr_options
 		spacer
